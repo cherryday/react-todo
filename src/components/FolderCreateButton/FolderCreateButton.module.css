@@ -1,0 +1,21 @@
+.button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.15px;
+  color: #767676;
+  margin-left: 9px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
+.button:hover {
+  color: #000;
+}
+
+.button svg {
+  margin-right: 10px;
+}
