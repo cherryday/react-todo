@@ -2,11 +2,19 @@
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.15px;
-  color: #fff;
-  background: #4DD599;
   border-radius: 4px;
   cursor: pointer;
   padding: 0 16px;
   border: none;
   height: 34px;
+}
+
+.primary {
+  color: #fff;
+  background-color: #4DD599;
+}
+
+.secondary {
+  color: #9C9C9C;
+  background-color: #F4F6F8;
 }
