@@ -1,0 +1,12 @@
+.button {
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.15px;
+  color: #fff;
+  background: #4DD599;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0 16px;
+  border: none;
+  height: 34px;
+}
