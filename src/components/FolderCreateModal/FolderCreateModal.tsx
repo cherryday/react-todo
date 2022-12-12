@@ -12,6 +12,8 @@ export const FolderCreateModal = (): JSX.Element => {
 
   function addFolder() {
     console.log('Create', color, name);
+    setName('')
+    setColor(FOLDER_COLORS[0])
   }
 
   return (
