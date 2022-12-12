@@ -2,21 +2,33 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-size: 14px;
-  line-height: 17px;
   letter-spacing: 0.15px;
-  color: #767676;
   margin-left: 9px;
   padding: 0;
   border: none;
   background-color: transparent;
-  margin-top: 38px;
 }
 
 .button:hover {
   color: #000;
 }
 
-.button svg {
+.primary {
+  font-size: 14px;
+  line-height: 17px;
+  color: #767676;
+}
+
+.primary svg {
   margin-right: 10px;
+}
+
+.secondary {
+  font-size: 16px;
+  line-height: 19px;
+  color: #B4B4B4;
+}
+
+.secondary svg {
+  margin-right: 19px;
 }
