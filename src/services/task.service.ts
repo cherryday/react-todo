@@ -11,7 +11,7 @@ export const FOLDER_COLORS = [
 
 export type FolderColor = typeof FOLDER_COLORS[number]
 
-interface Folder {
+export interface Folder {
   id: number;
   name: string;
   color: FolderColor;

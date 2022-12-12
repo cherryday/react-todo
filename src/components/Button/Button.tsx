@@ -6,12 +6,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   color?: 'primary' | 'secondary'
 }
 
-export const Button = ({ children, color = 'primary', ...props }: ButtonProps): JSX.Element => {
+export const Button = ({ children, color = 'primary', className, ...props }: ButtonProps): JSX.Element => {
   return (
-    <button {...props} className={cn(styles.button, {
+    <button className={cn(styles.button, className, {
       [styles.primary]: color === 'primary',
       [styles.secondary]: color === 'secondary'
-    })}>
+    })} {...props}>
       {children}
     </button>
   )
