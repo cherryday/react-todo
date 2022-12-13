@@ -6,7 +6,7 @@
   text-decoration: none;
 }
 
-.link:hover {
+.link:hover, .active {
   background-color: #fff;
 }
 

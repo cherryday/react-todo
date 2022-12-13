@@ -1,18 +1,22 @@
 import { ReactNode } from 'react';
+import { NavLink } from 'react-router-dom'
 import cn from 'classnames'
 import { ReactComponent as IconCross } from '../../assets/icons/cross.svg'
 import styles from './SidebarLink.module.css'
 
 interface SidebarLinkProps {
+  to: string;
   prepend: ReactNode;
   children: ReactNode;
   append?: boolean;
   className?: string;
 }
 
-export const SidebarLink = ({ prepend, append, children, className = '' }: SidebarLinkProps): JSX.Element => {
+export const SidebarLink = ({ to, prepend, append, children, className = '' }: SidebarLinkProps): JSX.Element => {
   return (
-    <a href="/" className={cn(styles.link, className)}>
+    <NavLink to={to} className={({ isActive }) => cn(styles.link, className, {
+      [styles.active]: isActive
+    })}>
       <span className={styles.prepend}>
         {prepend}
       </span>
@@ -20,6 +24,6 @@ export const SidebarLink = ({ prepend, append, children, className = '' }: Sideb
         {children}
       </span>
       {append && <span className={styles.append}><IconCross/></span>}
-    </a>
+    </NavLink>
   )
 }
