@@ -24,6 +24,7 @@ button {
 }
 
 .main {
+  padding: 56px;
   flex-grow: 1;
-  background-color: #E5E5E5;
+  background-color: #fff;
 }
