@@ -1,0 +1,32 @@
+.label {
+  display: flex;
+  align-items: center;
+}
+
+.label:hover .checkbox {
+  color: #B3B3B3;
+  background-color: #F2F2F2;
+  border: none;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 15px;
+  border: 2px solid #E8E8E8;
+}
+
+.input {
+  /* position: absolute;
+  appearance: none; */
+}
+
+.input:checked + .checkbox {
+  color: #fff;
+  background-color: #4DD599;
+  border: none;
+}

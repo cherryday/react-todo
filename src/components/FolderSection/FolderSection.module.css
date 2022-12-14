@@ -1,0 +1,16 @@
+.title {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  margin-bottom: 20px;
+}
+
+.divider {
+  height: 1px;
+  background: #F2F2F2;
+  margin-bottom: 20px;
+}
+
+.list {
+  margin-bottom: 20px;
+}
