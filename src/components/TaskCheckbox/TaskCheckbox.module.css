@@ -1,12 +1,17 @@
 .label {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .label:hover .checkbox {
   color: #B3B3B3;
   background-color: #F2F2F2;
   border: none;
+}
+
+.label:hover .button {
+  opacity: 1;
 }
 
 .checkbox {
@@ -18,15 +23,26 @@
   border-radius: 50%;
   margin-right: 15px;
   border: 2px solid #E8E8E8;
+  color: #fff;
 }
 
 .input {
-  /* position: absolute;
-  appearance: none; */
+  position: absolute;
+  appearance: none;
 }
 
 .input:checked + .checkbox {
   color: #fff;
   background-color: #4DD599;
   border: none;
+}
+
+.button {
+  color: #E3E3E3;
+  margin-left: auto;
+  opacity: 0;
+}
+
+.button:hover {
+  color: #000;
 }
