@@ -27,7 +27,7 @@ interface Task {
   completed: boolean;
 }
 
-export function createFolder(folder: Pick<Folder, 'name' | 'color'>): void {
+export function createFolder(folder: Pick<Folder, 'name' | 'color'>): Folder[] {
   const folders = getFolders()
   folders.push({
     id: uuidv4(),
@@ -35,11 +35,13 @@ export function createFolder(folder: Pick<Folder, 'name' | 'color'>): void {
     ...folder
   })
   setFolders(folders)
+  return folders
 }
 
-export function deleteFolder(id: string): void {
+export function deleteFolder(id: string): Folder[] {
   const folders = getFolders().filter(folder => folder.id !== id)
   setFolders(folders)
+  return folders
 }
 
 export function getFolders(): Folder[] {
@@ -52,7 +54,7 @@ export function getFolders(): Folder[] {
   return JSON.parse(lsData)
 }
 
-export function createTask(folderId: string, task: Pick<Task, 'name'>): void {
+export function createTask(folderId: string, task: Pick<Task, 'name'>): Folder[] {
   const folders = getFolders().map(folder => {
     if (folder.id === folderId) {
       folder.tasks = [
@@ -64,9 +66,10 @@ export function createTask(folderId: string, task: Pick<Task, 'name'>): void {
     return folder
   })
   setFolders(folders)
+  return folders
 }
 
-export function deleteTask(folderId: string, taskId: string) {
+export function deleteTask(folderId: string, taskId: string): Folder[] {
   const folders = getFolders().map(folder => {
     if (folder.id === folderId) {
       folder.tasks = folder.tasks.filter(task => task.id !== taskId)
@@ -75,6 +78,7 @@ export function deleteTask(folderId: string, taskId: string) {
     return folder
   })
   setFolders(folders)
+  return folders
 }
 
 function setFolders(folders: Folder[]): void {
