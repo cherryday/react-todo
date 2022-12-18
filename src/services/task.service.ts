@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid'
+
 export const FOLDER_COLORS = [
   '#C9D1D3',
   '#42B883',
@@ -12,14 +14,14 @@ export const FOLDER_COLORS = [
 export type FolderColor = typeof FOLDER_COLORS[number]
 
 export interface Folder {
-  id: number;
+  id: string;
   name: string;
   color: FolderColor;
   tasks: Task[];
 }
 
 interface Task {
-  id: number;
+  id: string;
   name: string;
   completed: boolean;
 }
@@ -29,14 +31,14 @@ const LS_KEY = ''
 export function createFolder(folder: Pick<Folder, 'name' | 'color'>): void {
   const folders = getFolders()
   folders.push({
-    id: 1,
+    id: uuidv4(),
     tasks: [],
     ...folder
   })
   setFolders(folders)
 }
 
-export function deleteFolder(id: number): void {
+export function deleteFolder(id: string): void {
   const folders = getFolders().filter(folder => folder.id !== id)
   setFolders(folders)
 }
@@ -51,12 +53,12 @@ export function getFolders(): Folder[] {
   return JSON.parse(lsData)
 }
 
-export function createTask(folderId: number, task: Pick<Task, 'name'>): void {
+export function createTask(folderId: string, task: Pick<Task, 'name'>): void {
   const folders = getFolders().map(folder => {
     if (folder.id === folderId) {
       folder.tasks = [
         ...folder.tasks,
-        { id: 1, completed: false, ...task }
+        { id: uuidv4(), completed: false, ...task }
       ]
     }
 
@@ -65,7 +67,7 @@ export function createTask(folderId: number, task: Pick<Task, 'name'>): void {
   setFolders(folders)
 }
 
-export function deleteTask(folderId: number, taskId: number) {
+export function deleteTask(folderId: string, taskId: string) {
   const folders = getFolders().map(folder => {
     if (folder.id === folderId) {
       folder.tasks = folder.tasks.filter(task => task.id !== taskId)
