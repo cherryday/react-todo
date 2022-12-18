@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 
+const LS_KEY = ''
 export const FOLDER_COLORS = [
   '#C9D1D3',
   '#42B883',
@@ -25,8 +26,6 @@ interface Task {
   name: string;
   completed: boolean;
 }
-
-const LS_KEY = ''
 
 export function createFolder(folder: Pick<Folder, 'name' | 'color'>): void {
   const folders = getFolders()
