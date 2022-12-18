@@ -14,3 +14,7 @@
 .list {
   margin-bottom: 20px;
 }
+
+.input + .input {
+  margin-top: 20px;
+}

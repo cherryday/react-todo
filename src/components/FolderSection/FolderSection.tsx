@@ -23,6 +23,7 @@ export const FolderSection = ({ folder }: FolderSectionProps): JSX.Element => {
           <TaskCheckbox
             key={task.id}
             label={task.name}
+            className={styles.input}
             checked={task.completed}
             onChange={() => {}}
           />
@@ -30,7 +31,7 @@ export const FolderSection = ({ folder }: FolderSectionProps): JSX.Element => {
       </div>
       {!isOpen ? <AddButton variant="secondary" onClick={() => setIsOpen(true)}>
         Новая задача
-      </AddButton> : <TaskCreateForm cancel={() => setIsOpen(false)}/>}
+      </AddButton> : <TaskCreateForm folderId={folder.id} cancel={() => setIsOpen(false)}/>}
     </div>
   )
 }
