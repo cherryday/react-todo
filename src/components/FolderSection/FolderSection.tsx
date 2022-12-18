@@ -1,7 +1,7 @@
 import { TaskCreateForm } from '../TaskCreateForm/TaskCreateForm'
 import { AddButton } from '../AddButton/AddButton'
 import { TaskCheckbox } from '../TaskCheckbox/TaskCheckbox'
-import { Folder } from '../../services/task.service'
+import { Folder } from '../../services/todo.service'
 import styles from './FolderSection.module.css'
 import { useState } from 'react'
 
@@ -19,7 +19,14 @@ export const FolderSection = ({ folder }: FolderSectionProps): JSX.Element => {
       </h1>
       <div className={styles.divider}></div>
       <div className={styles.list}>
-        <TaskCheckbox/>
+        {folder.tasks.map(task => (
+          <TaskCheckbox
+            key={task.id}
+            label={task.name}
+            checked={task.completed}
+            onChange={() => {}}
+          />
+        ))}
       </div>
       {!isOpen ? <AddButton variant="secondary" onClick={() => setIsOpen(true)}>
         Новая задача
