@@ -11,3 +11,7 @@
   line-height: 39px;
   color: #C9D1D3;
 }
+
+.section + .section {
+  margin-top: 40px;
+}

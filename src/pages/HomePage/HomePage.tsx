@@ -14,6 +14,7 @@ export const HomePage = (): JSX.Element => {
         <FolderSection
           key={folder.id}
           folder={folder}
+          className={styles.section}
         />
       )) : <h1 className={styles.title}>Задачи отсутствуют</h1>}
     </div>
