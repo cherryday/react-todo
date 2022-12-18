@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Input } from '../Input/Input'
 import { Bage } from '../Bage/Bage'
 import { Button } from '../Button/Button'
-import { FOLDER_COLORS, FolderColor } from '../../services/task.service'
+import { FOLDER_COLORS, FolderColor } from '../../services/todo.service'
 import { ReactComponent as IconCross } from '../../assets/icons/cross.svg'
 import styles from './FolderCreateModal.module.css'
 
