@@ -5,9 +5,20 @@ import { FolderCreateModal } from '../FolderCreateModal/FolderCreateModal'
 import { useTodoContext } from '../../context/todo.context'
 import { ReactComponent as IconList } from '../../assets/icons/list.svg'
 import styles from './Sidebar.module.css'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export const Sidebar = (): JSX.Element => {
+  const location = useLocation()
+  const navigate = useNavigate()
   const { folders, deleteFolder } = useTodoContext()
+
+  const handleRemove = (id: string) => {
+    deleteFolder(id)
+
+    if (location.pathname === `/${id}`) {
+      navigate('/')
+    }
+  }
 
   return (
     <aside className={styles.sidebar}>
@@ -22,9 +33,8 @@ export const Sidebar = (): JSX.Element => {
               <SidebarLink
                 to={folder.id}
                 prepend={<Bage color={folder.color}/>}
-                append
                 key={folder.id}
-                remove={() => deleteFolder(folder.id)}
+                remove={() => handleRemove(folder.id)}
               >
                 {folder.name}
               </SidebarLink>

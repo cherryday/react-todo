@@ -8,11 +8,11 @@ interface SidebarLinkProps {
   to: string;
   prepend: ReactNode;
   children: ReactNode;
-  append?: boolean;
   className?: string;
+  remove?: () => void;
 }
 
-export const SidebarLink = ({ to, prepend, append, children, className = '' }: SidebarLinkProps): JSX.Element => {
+export const SidebarLink = ({ to, prepend, children, remove, className = '' }: SidebarLinkProps): JSX.Element => {
   return (
     <NavLink to={to} className={({ isActive }) => cn(styles.link, className, {
       [styles.active]: isActive
@@ -23,7 +23,10 @@ export const SidebarLink = ({ to, prepend, append, children, className = '' }: S
       <span className={styles.text}>
         {children}
       </span>
-      {append && <span className={styles.append}><IconCross/></span>}
+      {remove && <span className={styles.append} onClick={(event) => {
+        event.preventDefault()
+        remove()
+      }}><IconCross/></span>}
     </NavLink>
   )
 }
