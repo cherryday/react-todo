@@ -3,15 +3,17 @@ import { Input } from '../Input/Input'
 import { Bage } from '../Bage/Bage'
 import { Button } from '../Button/Button'
 import { FOLDER_COLORS, FolderColor } from '../../services/todo.service'
+import { useTodoContext } from '../../context/todo.context'
 import { ReactComponent as IconCross } from '../../assets/icons/cross.svg'
 import styles from './FolderCreateModal.module.css'
 
 export const FolderCreateModal = (): JSX.Element => {
+  const { createFolder } = useTodoContext()
   const [name, setName] = useState<string>('')
   const [color, setColor] = useState<FolderColor>(FOLDER_COLORS[0])
 
   function addFolder() {
-    console.log('Create', color, name);
+    createFolder({ color, name })
     setName('')
     setColor(FOLDER_COLORS[0])
   }
