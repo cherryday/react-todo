@@ -21,7 +21,7 @@ export interface Folder {
   tasks: Task[];
 }
 
-interface Task {
+export interface Task {
   id: string;
   name: string;
   completed: boolean;
