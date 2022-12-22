@@ -12,6 +12,8 @@ interface BageProps extends HTMLAttributes<HTMLDivElement> {
 export const Bage = ({ color, selected, onClick, size = 'md' }: BageProps): JSX.Element => {
   return (
     <div
+      role="radio"
+      aria-checked={selected}
       className={cn(styles.bage, {
         [styles.md]: size === 'md',
         [styles.lg]: size === 'lg',
