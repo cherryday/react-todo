@@ -8,9 +8,10 @@ interface TaskCheckboxProps {
   checked: boolean
   className?: string
   onChange: () => void
+  remove: () => void
 }
 
-export const TaskCheckbox = ({ label, checked, className, onChange }: TaskCheckboxProps): JSX.Element => {
+export const TaskCheckbox = ({ label, checked, className, onChange, remove }: TaskCheckboxProps): JSX.Element => {
   return (
     <label className={cn(styles.label, className)}>
       <input
@@ -23,9 +24,9 @@ export const TaskCheckbox = ({ label, checked, className, onChange }: TaskCheckb
         <IconCheck/>
       </span>
       {label}
-      <span className={styles.button}>
+      <button className={styles.button} onClick={remove}>
         <IconCross/>
-      </span>
+      </button>
     </label>
   )
 }
