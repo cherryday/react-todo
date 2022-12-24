@@ -3,7 +3,7 @@ import { ReactComponent as IconCheck } from '../../assets/icons/check.svg'
 import { ReactComponent as IconCross } from '../../assets/icons/cross.svg'
 import styles from './TaskCheckbox.module.css'
 
-interface TaskCheckboxProps {
+export interface TaskCheckboxProps {
   label: string
   checked: boolean
   className?: string
