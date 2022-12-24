@@ -5,6 +5,7 @@ import { AddButton } from '../AddButton/AddButton'
 import { TaskCheckbox } from '../TaskCheckbox/TaskCheckbox'
 import { Folder } from '../../services/todo.service'
 import styles from './FolderSection.module.css'
+import { useTodoContext } from '../../context/todo.context'
 
 interface FolderSectionProps {
   folder: Folder
@@ -13,6 +14,7 @@ interface FolderSectionProps {
 
 export const FolderSection = ({ folder, className }: FolderSectionProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const { deleteTask, updateTask } = useTodoContext()
 
   return (
     <div className={cn(className)}>
@@ -27,7 +29,8 @@ export const FolderSection = ({ folder, className }: FolderSectionProps): JSX.El
             label={task.name}
             className={styles.input}
             checked={task.completed}
-            onChange={() => {}}
+            onChange={() => updateTask(folder.id, { id: task.id, completed: !task.completed })}
+            remove={() => deleteTask(folder.id, task.id)}
           />
         ))}
       </div>
