@@ -81,6 +81,27 @@ export function deleteTask(folderId: string, taskId: string): Folder[] {
   return folders
 }
 
+export function updateTask(folderId: string, task: Pick<Task, 'id' | 'completed'>) {
+  const folders = getFolders().map(folder => {
+    if (folder.id === folderId) {
+      folder.tasks = folder.tasks.map(t => {
+        if (t.id === task.id) {
+          return {
+            ...t,
+            ...task
+          }
+        }
+
+        return t
+      })
+    }
+
+    return folder
+  })
+  setFolders(folders)
+  return folders
+}
+
 function setFolders(folders: Folder[]): void {
   localStorage.setItem(LS_KEY, JSON.stringify(folders))
 }
