@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 
-const LS_KEY = ''
+const LS_KEY = 'todo'
 export const FOLDER_COLORS = [
   '#C9D1D3',
   '#42B883',
