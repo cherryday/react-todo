@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { Input } from '../Input/Input'
 import { Bage } from '../Bage/Bage'
 import { Button } from '../Button/Button'
@@ -12,15 +12,16 @@ export const FolderCreateModal = (): JSX.Element => {
   const [name, setName] = useState<string>('')
   const [color, setColor] = useState<FolderColor>(FOLDER_COLORS[0])
 
-  function addFolder() {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     createFolder({ color, name })
     setName('')
     setColor(FOLDER_COLORS[0])
   }
 
   return (
-    <div className={styles.modal}>
-      <button className={styles.close}>
+    <form className={styles.modal} onSubmit={handleSubmit}>
+      <button type="button" className={styles.close}>
         <IconCross/>
       </button>
 
@@ -42,7 +43,7 @@ export const FolderCreateModal = (): JSX.Element => {
         ))}
       </div>
 
-      <Button onClick={addFolder}>Добавить</Button>
-    </div>
+      <Button>Добавить</Button>
+    </form>
   )
 }
