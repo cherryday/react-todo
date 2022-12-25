@@ -26,6 +26,7 @@ export const FolderCreateModal = (): JSX.Element => {
       </button>
 
       <Input
+        autoFocus
         placeholder="Название папки"
         value={name}
         onChange={(e) => setName(e.target.value)}

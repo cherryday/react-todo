@@ -22,6 +22,7 @@ export const TaskCreateForm = ({ folderId, cancel }: TaskCreateFormProps): JSX.E
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <Input
+        autoFocus
         placeholder="Текст задачи"
         className={styles.input}
         value={name}
