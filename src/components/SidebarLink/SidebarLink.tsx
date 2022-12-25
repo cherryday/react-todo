@@ -4,7 +4,7 @@ import cn from 'classnames'
 import { ReactComponent as IconCross } from '../../assets/icons/cross.svg'
 import styles from './SidebarLink.module.css'
 
-interface SidebarLinkProps {
+export interface SidebarLinkProps {
   to: string;
   prepend: ReactNode;
   children: ReactNode;
@@ -23,10 +23,10 @@ export const SidebarLink = ({ to, prepend, children, remove, className = '' }: S
       <span className={styles.text}>
         {children}
       </span>
-      {remove && <span className={styles.append} onClick={(event) => {
+      {remove && <button className={styles.append} onClick={(event) => {
         event.preventDefault()
         remove()
-      }}><IconCross/></span>}
+      }}><IconCross/></button>}
     </NavLink>
   )
 }

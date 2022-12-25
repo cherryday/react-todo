@@ -32,6 +32,10 @@
 .append {
   color: #E3E3E3;
   opacity: 0;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background-color: transparent;
 }
 
 .append:hover {
