@@ -1,6 +1,6 @@
 import { SidebarLink } from '../SidebarLink/SidebarLink'
 import { Bage } from '../Bage/Bage'
-import { FolderCreateModal } from '../FolderCreateModal/FolderCreateModal' 
+import { FolderCreateTooltip } from '../FolderCreateTooltip/FolderCreateTooltip' 
 import { useTodoContext } from '../../context/todo.context'
 import { ReactComponent as IconList } from '../../assets/icons/list.svg'
 import styles from './Sidebar.module.css'
@@ -42,7 +42,7 @@ export const Sidebar = (): JSX.Element => {
         </>
       }
 
-      <FolderCreateModal/>
+      <FolderCreateTooltip/>
     </aside>
   )
 }

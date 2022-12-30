@@ -7,9 +7,9 @@ import { AddButton } from '../AddButton/AddButton'
 import { FOLDER_COLORS, FolderColor } from '../../services/todo.service'
 import { useTodoContext } from '../../context/todo.context'
 import { ReactComponent as IconCross } from '../../assets/icons/cross.svg'
-import styles from './FolderCreateModal.module.css'
+import styles from './FolderCreateTooltip.module.css'
 
-export const FolderCreateModal = (): JSX.Element => {
+export const FolderCreateTooltip = (): JSX.Element => {
   const { createFolder } = useTodoContext()
   const [name, setName] = useState<string>('')
   const [color, setColor] = useState<FolderColor>(FOLDER_COLORS[0])
@@ -42,13 +42,15 @@ export const FolderCreateModal = (): JSX.Element => {
     
       {visible &&
         <form
-          className={styles.modal}
+          name="folder"
+          className={styles.form}
           ref={setTooltipRef}
           onSubmit={handleSubmit}
           {...getTooltipProps()}
         >
           <button
             type="button"
+            aria-label="close"
             className={styles.close}
             onClick={() => setControlledVisible(false)}
           >
