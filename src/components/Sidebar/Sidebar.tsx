@@ -1,6 +1,5 @@
 import { SidebarLink } from '../SidebarLink/SidebarLink'
 import { Bage } from '../Bage/Bage'
-import { AddButton } from '../AddButton/AddButton'
 import { FolderCreateModal } from '../FolderCreateModal/FolderCreateModal' 
 import { useTodoContext } from '../../context/todo.context'
 import { ReactComponent as IconList } from '../../assets/icons/list.svg'
@@ -42,10 +41,6 @@ export const Sidebar = (): JSX.Element => {
           </div>
         </>
       }
-
-      <AddButton>
-        Добавить папку
-      </AddButton>
 
       <FolderCreateModal/>
     </aside>
