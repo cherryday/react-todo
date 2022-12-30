@@ -45,7 +45,12 @@ describe('todo.service', () => {
         tasks: [],
       },
     ]))
-    deleteFolder('1')
+    expect(deleteFolder('1')).toEqual([{
+      id: '2',
+      name: 'name',
+      color: FOLDER_COLORS[0],
+      tasks: [],
+    }])
     expect(mockSetItem).toHaveBeenCalledWith('todo', JSON.stringify([{
       id: '2',
       name: 'name',
