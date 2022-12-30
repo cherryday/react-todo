@@ -14,7 +14,9 @@ Object.defineProperty(window, 'localStorage', {
 
 describe('todo.service', () => {
   it('getFolders', () => {
-    getFolders()
+    const mockGetItem = localStorage.getItem as jest.Mock
+    mockGetItem.mockReturnValue('[1, 2, 3]')
+    expect(getFolders()).toEqual([1, 2, 3])
     expect(localStorage.getItem).toHaveBeenCalledWith('todo')
   })
 
