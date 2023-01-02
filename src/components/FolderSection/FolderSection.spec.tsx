@@ -17,5 +17,8 @@ describe('FolderSection', () => {
 
     userEvent.click(screen.getByRole('button', { name: /новая задача/i }))
     expect(screen.getByRole('form')).toBeInTheDocument()
+
+    userEvent.click(screen.getByRole('button', { name: /отмена/i }))
+    expect(screen.queryByRole('form')).not.toBeInTheDocument()
   })
 })
