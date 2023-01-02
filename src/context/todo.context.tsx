@@ -1,7 +1,7 @@
 import { createContext, PropsWithChildren, useContext, useState } from 'react'
 import { getFolders, createFolder, deleteFolder, createTask, updateTask, deleteTask, Folder, Task } from '../services/todo.service'
 
-interface ITodoContext {
+export interface TodoContextProps {
   folders: Folder[]
   createFolder: (folder: Pick<Folder, 'name' | 'color'>) => void
   deleteFolder: (id: string) => void
@@ -10,12 +10,12 @@ interface ITodoContext {
   deleteTask: (folderId: string, taskId: string) => void
 }
 
-const TodoContext = createContext<ITodoContext | null>(null)
+export const TodoContext = createContext<TodoContextProps | null>(null)
 
 export const TodoProvider = ({ children }: PropsWithChildren) => {
   const [folders, setFolders] = useState<Folder[]>(() => getFolders())
 
-  const value: ITodoContext = {
+  const value: TodoContextProps = {
     folders,
     createFolder(folder) {
       setFolders(createFolder(folder))
