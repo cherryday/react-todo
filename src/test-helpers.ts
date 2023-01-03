@@ -1,5 +1,17 @@
 import { faker } from '@faker-js/faker'
-import { Folder, Task, FOLDER_COLORS } from '../../services/todo.service'
+import { TodoContextProps } from './context/todo.context'
+import { Folder, Task, FOLDER_COLORS } from './services/todo.service'
+
+export function createMockTodoContextProps(): TodoContextProps {
+  return {
+    folders: [],
+    createFolder: jest.fn(),
+    deleteFolder: jest.fn(),
+    createTask: jest.fn(),
+    updateTask: jest.fn(),
+    deleteTask: jest.fn(),
+  }
+}
 
 export function createMockFolder(): Folder {
   return {

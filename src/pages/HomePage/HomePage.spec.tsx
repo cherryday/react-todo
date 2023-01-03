@@ -1,21 +1,12 @@
 import { render, screen } from '@testing-library/react'
-import { TodoContext, TodoContextProps } from '../../context/todo.context'
-import { createMockFolder } from '../../__tests__/__helpers__/todo'
+import { createMockFolder, createMockTodoContextProps } from '../../test-helpers'
+import { TodoContext } from '../../context/todo.context'
 import { HomePage } from './HomePage'
-
-const mockTodoContext: TodoContextProps = {
-  folders: [],
-  createFolder: jest.fn(),
-  deleteFolder: jest.fn(),
-  createTask: jest.fn(),
-  updateTask: jest.fn(),
-  deleteTask: jest.fn(),
-}
 
 describe('HomePage', () => {
   it('should not render list', () => {
     render(
-      <TodoContext.Provider value={mockTodoContext}>
+      <TodoContext.Provider value={createMockTodoContextProps()}>
         <HomePage/>
       </TodoContext.Provider>
     )
@@ -25,7 +16,7 @@ describe('HomePage', () => {
   it('should render list of folder', () => {
     const folders = [createMockFolder(), createMockFolder()]
     render(
-      <TodoContext.Provider value={{ ...mockTodoContext, folders }}>
+      <TodoContext.Provider value={{ ...createMockTodoContextProps(), folders }}>
         <HomePage/>
       </TodoContext.Provider>
     )

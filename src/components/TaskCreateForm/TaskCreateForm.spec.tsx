@@ -1,22 +1,14 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { TodoContext, TodoContextProps } from '../../context/todo.context'
+import { createMockTodoContextProps } from '../../test-helpers'
+import { TodoContext } from '../../context/todo.context'
 import { TaskCreateForm } from './TaskCreateForm'
-
-const mockTodoContext: TodoContextProps = {
-  folders: [],
-  createFolder: jest.fn(),
-  deleteFolder: jest.fn(),
-  createTask: jest.fn(),
-  updateTask: jest.fn(),
-  deleteTask: jest.fn(),
-}
 
 describe('TaskCreateForm', () => {
   it('should call cancelHandler', () => {
     const cancelHandler = jest.fn()
     render(
-      <TodoContext.Provider value={mockTodoContext}>
+      <TodoContext.Provider value={createMockTodoContextProps()}>
         <TaskCreateForm folderId="" cancel={cancelHandler}/>
       </TodoContext.Provider>
     )
@@ -30,7 +22,7 @@ describe('TaskCreateForm', () => {
     const taskName = 'name'
     render(
       <TodoContext.Provider value={{
-        ...mockTodoContext,
+        ...createMockTodoContextProps(),
         createTask: createHandler
       }}>
         <TaskCreateForm folderId={folderId} cancel={() => {}}/>
