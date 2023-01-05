@@ -14,28 +14,38 @@ Object.defineProperty(window, 'localStorage', {
 })
 
 describe('todo.service', () => {
+  const mockV4 = v4 as jest.Mock
+  const mockGetItem = localStorage.getItem as jest.Mock
+  const mockSetItem = localStorage.setItem as jest.Mock
+
   it('getFolders', () => {
-    const mockGetItem = localStorage.getItem as jest.Mock
+    expect(getFolders()).toEqual([])
+
     const folders = [createMockFolder(), createMockFolder()]
+
     mockGetItem.mockReturnValue(JSON.stringify(folders))
+
     expect(getFolders()).toEqual(folders)
     expect(localStorage.getItem).toHaveBeenCalledWith('todo')
   })
 
   it('createFolder', () => {
-    const mockV4 = v4 as jest.Mock
-    mockV4.mockReturnValue('id')
-    const payload = { name: 'name', color: FOLDER_COLORS[0] }
-    expect(createFolder(payload)).toEqual([{ id: 'id', tasks: [], ...payload }])
-    expect(localStorage.setItem).toHaveBeenCalledWith('todo', JSON.stringify([{ id: 'id', tasks: [], ...payload }]))
+    const createdFolder = { id: 'id', tasks: [], name: 'name', color: FOLDER_COLORS[0] }
+    const folderA = createMockFolder()
+
+    mockV4.mockReturnValue(createdFolder.id)
+    mockGetItem.mockReturnValue(JSON.stringify([folderA]))
+
+    expect(createFolder({ name: createdFolder.name, color: createdFolder.color })).toEqual([folderA, createdFolder])
+    expect(localStorage.setItem).toHaveBeenCalledWith('todo', JSON.stringify([folderA, createdFolder]))
   })
 
   it('deleteFolder', () => {
     const folderA = createMockFolder()
     const folderB = createMockFolder()
-    const mockGetItem = localStorage.getItem as jest.Mock
-    const mockSetItem = localStorage.setItem as jest.Mock
+
     mockGetItem.mockReturnValue(JSON.stringify([folderA, folderB]))
+
     expect(deleteFolder(folderA.id)).toEqual([folderB])
     expect(mockSetItem).toHaveBeenCalledWith('todo', JSON.stringify([folderB]))
   })
@@ -43,14 +53,13 @@ describe('todo.service', () => {
   it('createTask', () => {
     const folderA = createMockFolder()
     const folderB = createMockFolder()
-    const mockGetItem = localStorage.getItem as jest.Mock
-    const mockV4 = v4 as jest.Mock
-    mockV4.mockReturnValue('id')
+    const createdTask = { id: 'id', completed: false, name: 'name' }
+    const updatedFolder = { ...folderA, tasks: [createdTask] }
+
+    mockV4.mockReturnValue(createdTask.id)
     mockGetItem.mockReturnValue(JSON.stringify([folderA, folderB]))
-    expect(createTask(folderA.id, { name: 'name' })).toEqual([
-      { ...folderA, tasks: [{ id: 'id', completed: false, name: 'name' }] },
-      folderB
-    ])
-    expect(localStorage.setItem).toHaveBeenCalledWith('todo', JSON.stringify([{ ...folderA, tasks: [{ id: 'id', completed: false, name: 'name' }] }, folderB]))
+
+    expect(createTask(folderA.id, { name: createdTask.name })).toEqual([updatedFolder, folderB])
+    expect(mockSetItem).toHaveBeenCalledWith('todo', JSON.stringify([updatedFolder, folderB]))
   })
 })
