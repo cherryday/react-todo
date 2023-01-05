@@ -1,6 +1,6 @@
 import { v4 } from 'uuid'
 import { createMockFolder } from '../test-helpers'
-import { getFolders, createFolder, deleteFolder, FOLDER_COLORS } from './todo.service'
+import { getFolders, createFolder, deleteFolder, FOLDER_COLORS, createTask } from './todo.service'
 
 jest.mock('uuid', () => ({
   v4: jest.fn(),
@@ -38,5 +38,19 @@ describe('todo.service', () => {
     mockGetItem.mockReturnValue(JSON.stringify([folderA, folderB]))
     expect(deleteFolder(folderA.id)).toEqual([folderB])
     expect(mockSetItem).toHaveBeenCalledWith('todo', JSON.stringify([folderB]))
+  })
+
+  it('createTask', () => {
+    const folderA = createMockFolder()
+    const folderB = createMockFolder()
+    const mockGetItem = localStorage.getItem as jest.Mock
+    const mockV4 = v4 as jest.Mock
+    mockV4.mockReturnValue('id')
+    mockGetItem.mockReturnValue(JSON.stringify([folderA, folderB]))
+    expect(createTask(folderA.id, { name: 'name' })).toEqual([
+      { ...folderA, tasks: [{ id: 'id', completed: false, name: 'name' }] },
+      folderB
+    ])
+    expect(localStorage.setItem).toHaveBeenCalledWith('todo', JSON.stringify([{ ...folderA, tasks: [{ id: 'id', completed: false, name: 'name' }] }, folderB]))
   })
 })
