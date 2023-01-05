@@ -1,6 +1,6 @@
 import { v4 } from 'uuid'
-import { createMockFolder } from '../test-helpers'
-import { getFolders, createFolder, deleteFolder, FOLDER_COLORS, createTask } from './todo.service'
+import { createMockFolder, createMockTask } from '../test-helpers'
+import { getFolders, createFolder, deleteFolder, createTask, deleteTask, updateTask, FOLDER_COLORS } from './todo.service'
 
 jest.mock('uuid', () => ({
   v4: jest.fn(),
@@ -60,6 +60,34 @@ describe('todo.service', () => {
     mockGetItem.mockReturnValue(JSON.stringify([folderA, folderB]))
 
     expect(createTask(folderA.id, { name: createdTask.name })).toEqual([updatedFolder, folderB])
+    expect(mockSetItem).toHaveBeenCalledWith('todo', JSON.stringify([updatedFolder, folderB]))
+  })
+
+  it('deleteTask', () => {
+    const taskA = createMockTask()
+    const taskB = createMockTask()
+    const folderA = createMockFolder()
+    folderA.tasks = [taskA, taskB]
+    const folderB = createMockFolder()
+    const updatedFolder = { ...folderA, tasks: [taskB] }
+    
+    mockGetItem.mockReturnValue(JSON.stringify([folderA, folderB]))
+
+    expect(deleteTask(folderA.id, taskA.id)).toEqual([updatedFolder, folderB])
+    expect(mockSetItem).toHaveBeenCalledWith('todo', JSON.stringify([updatedFolder, folderB]))
+  })
+
+  it('updateTask', () => {
+    const taskA = createMockTask()
+    const taskB = createMockTask()
+    const folderA = createMockFolder()
+    folderA.tasks = [taskA, taskB]
+    const folderB = createMockFolder()
+    const updatedFolder = { ...folderA, tasks: [{ ...taskA, completed: true }, taskB] }
+
+    mockGetItem.mockReturnValue(JSON.stringify([folderA, folderB]))
+
+    expect(updateTask(folderA.id, { id: taskA.id, completed: true })).toEqual([updatedFolder, folderB])
     expect(mockSetItem).toHaveBeenCalledWith('todo', JSON.stringify([updatedFolder, folderB]))
   })
 })
